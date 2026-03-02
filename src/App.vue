@@ -28,9 +28,8 @@
                 <input
                   type="text"
                   class="quantity-input"
-                  :value="shoppingCartItems[0].quantity"
+                  v-model.number="shoppingCartItems[0].quantity"
                   aria-label="quantity"
-                  @blur="changeQuantity(shoppingCartItems[0].id, $event)"
                 />
                 <button
                   class="quantity-change-button"
@@ -68,9 +67,8 @@
                 <input
                   type="text"
                   class="quantity-input"
-                  :value="shoppingCartItems[1].quantity"
+                  v-model.number="shoppingCartItems[1].quantity"
                   aria-label="quantity"
-                  @blur="changeQuantity(shoppingCartItems[1].id, $event)"
                 />
                 <button
                   class="quantity-change-button"
@@ -108,9 +106,8 @@
                 <input
                   type="text"
                   class="quantity-input"
-                  :value="shoppingCartItems[2].quantity"
+                  v-model.number="shoppingCartItems[2].quantity"
                   aria-label="quantity"
-                  @blur="changeQuantity(shoppingCartItems[2].id, $event)"
                 />
                 <button
                   class="quantity-change-button"
@@ -148,9 +145,8 @@
                 <input
                   type="text"
                   class="quantity-input"
-                  :value="shoppingCartItems[3].quantity"
+                  v-model.number="shoppingCartItems[3].quantity"
                   aria-label="quantity"
-                  @blur="changeQuantity(shoppingCartItems[3].id, $event)"
                 />
                 <button
                   class="quantity-change-button"
@@ -188,9 +184,8 @@
                 <input
                   type="text"
                   class="quantity-input"
-                  :value="shoppingCartItems[4].quantity"
+                  v-model.number="shoppingCartItems[4].quantity"
                   aria-label="quantity"
-                  @blur="changeQuantity(shoppingCartItems[4].id, $event)"
                 />
                 <button
                   class="quantity-change-button"
@@ -300,16 +295,6 @@ function addOne(id) {
   const item = shoppingCartItems.value.find((item) => item.id === id);
   if (item.isInStock) {
     item.quantity++;
-  }
-}
-
-function changeQuantity(id, event) {
-  const item = shoppingCartItems.value.find((item) => item.id === id);
-  const newQuantity = parseInt(event.target.value);
-  if (!isNaN(newQuantity) && newQuantity >= 0 && newQuantity <= 100) {
-    item.quantity = newQuantity;
-  } else {
-    event.target.value = item.quantity;
   }
 }
 </script>
