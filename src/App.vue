@@ -19,14 +19,25 @@
             </div>
             <div class="item-actions">
               <div class="quantity-selector">
-                <button class="quantity-change-button">−</button>
+                <button
+                  class="quantity-change-button"
+                  @click="decreaseOne(shoppingCartItems[0].id)"
+                >
+                  −
+                </button>
                 <input
                   type="text"
                   class="quantity-input"
                   :value="shoppingCartItems[0].quantity"
                   aria-label="quantity"
+                  @blur="changeQuantity(shoppingCartItems[0].id, $event)"
                 />
-                <button class="quantity-change-button">+</button>
+                <button
+                  class="quantity-change-button"
+                  @click="addOne(shoppingCartItems[0].id)"
+                >
+                  +
+                </button>
               </div>
               <button class="remove-item">✕</button>
             </div>
@@ -48,14 +59,25 @@
             </div>
             <div class="item-actions">
               <div class="quantity-selector">
-                <button class="quantity-change-button">−</button>
+                <button
+                  class="quantity-change-button"
+                  @click="decreaseOne(shoppingCartItems[1].id)"
+                >
+                  −
+                </button>
                 <input
                   type="text"
                   class="quantity-input"
                   :value="shoppingCartItems[1].quantity"
                   aria-label="quantity"
+                  @blur="changeQuantity(shoppingCartItems[1].id, $event)"
                 />
-                <button class="quantity-change-button">+</button>
+                <button
+                  class="quantity-change-button"
+                  @click="addOne(shoppingCartItems[1].id)"
+                >
+                  +
+                </button>
               </div>
               <button class="remove-item">✕</button>
             </div>
@@ -77,14 +99,25 @@
             </div>
             <div class="item-actions">
               <div class="quantity-selector">
-                <button class="quantity-change-button">−</button>
+                <button
+                  class="quantity-change-button"
+                  @click="decreaseOne(shoppingCartItems[2].id)"
+                >
+                  −
+                </button>
                 <input
                   type="text"
                   class="quantity-input"
                   :value="shoppingCartItems[2].quantity"
                   aria-label="quantity"
+                  @blur="changeQuantity(shoppingCartItems[2].id, $event)"
                 />
-                <button class="quantity-change-button">+</button>
+                <button
+                  class="quantity-change-button"
+                  @click="addOne(shoppingCartItems[2].id)"
+                >
+                  +
+                </button>
               </div>
               <button class="remove-item">✕</button>
             </div>
@@ -106,14 +139,25 @@
             </div>
             <div class="item-actions">
               <div class="quantity-selector">
-                <button class="quantity-change-button">−</button>
+                <button
+                  class="quantity-change-button"
+                  @click="decreaseOne(shoppingCartItems[3].id)"
+                >
+                  −
+                </button>
                 <input
                   type="text"
                   class="quantity-input"
                   :value="shoppingCartItems[3].quantity"
                   aria-label="quantity"
+                  @blur="changeQuantity(shoppingCartItems[3].id, $event)"
                 />
-                <button class="quantity-change-button">+</button>
+                <button
+                  class="quantity-change-button"
+                  @click="addOne(shoppingCartItems[3].id)"
+                >
+                  +
+                </button>
               </div>
               <button class="remove-item">✕</button>
             </div>
@@ -135,14 +179,25 @@
             </div>
             <div class="item-actions">
               <div class="quantity-selector">
-                <button class="quantity-change-button">−</button>
+                <button
+                  class="quantity-change-button"
+                  @click="decreaseOne(shoppingCartItems[4].id)"
+                >
+                  −
+                </button>
                 <input
                   type="text"
                   class="quantity-input"
                   :value="shoppingCartItems[4].quantity"
                   aria-label="quantity"
+                  @blur="changeQuantity(shoppingCartItems[4].id, $event)"
                 />
-                <button class="quantity-change-button">+</button>
+                <button
+                  class="quantity-change-button"
+                  @click="addOne(shoppingCartItems[4].id)"
+                >
+                  +
+                </button>
               </div>
               <button class="remove-item">✕</button>
             </div>
@@ -232,6 +287,31 @@ let shoppingCartItems = ref([
 
 // control summart
 let hideDetails = ref(false);
+
+// making plus and minus buttons work
+function decreaseOne(id) {
+  const item = shoppingCartItems.value.find((item) => item.id === id);
+  if (item.quantity > 0) {
+    item.quantity--;
+  }
+}
+
+function addOne(id) {
+  const item = shoppingCartItems.value.find((item) => item.id === id);
+  if (item.isInStock) {
+    item.quantity++;
+  }
+}
+
+function changeQuantity(id, event) {
+  const item = shoppingCartItems.value.find((item) => item.id === id);
+  const newQuantity = parseInt(event.target.value);
+  if (!isNaN(newQuantity) && newQuantity >= 0 && newQuantity <= 100) {
+    item.quantity = newQuantity;
+  } else {
+    event.target.value = item.quantity;
+  }
+}
 </script>
 
 <style scoped>
