@@ -186,6 +186,7 @@
 import { ref } from "vue";
 
 let username = "Harry";
+// using ref here so that when we have a click event we can change the quantity of the items
 let shoppingCartItems = ref([
   {
     id: 1,
